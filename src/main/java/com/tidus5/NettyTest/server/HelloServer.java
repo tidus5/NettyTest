@@ -29,6 +29,7 @@ public class HelloServer {
 
 			// 服务器绑定端口监听
 			ChannelFuture f = b.bind(portNumber).sync();
+			System.out.println(" server started.");
 			// 监听服务器关闭监听
 			f.channel().closeFuture().sync();
 
