@@ -1,17 +1,28 @@
 package com.tidus5.NettyTest.net;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.tidus5.NettyTest.client.NettyClient;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.EventLoop;
 
 public class ClientHandler extends ChannelInboundHandlerAdapter {
 
 	private Logger logger = LoggerFactory.getLogger(ServerHandler.class);
+
+	private NettyClient client;
+
+	public ClientHandler(NettyClient client) {
+		this.client = client;
+	}
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -20,35 +31,52 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		final EventLoop eventLoop = ctx.channel().eventLoop();
+		eventLoop.schedule(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					client.createBoostrap();
+					client.run();
+				} catch (InterruptedException | IOException e) {
+					e.printStackTrace();
+				}
+
+			}
+
+		}, 1L, TimeUnit.SECONDS);
+
+		super.channelInactive(ctx);
+
 	}
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		
-		if(msg instanceof ByteBuffer){
+
+		if (msg instanceof ByteBuffer) {
 			ByteBuffer buf = (ByteBuffer) msg;
 			short sip = buf.getShort();
 
 			byte[] data = new byte[buf.remaining()];
 			buf.get(data);
-			
+
 			System.out.println("server say:" + new String(data, Charset.forName("UTF-8")));
 
-//			ByteBuffer sendMsg = ByteBuffer.allocate(8);
-//			sendMsg.putShort(sip);
-//			sendMsg.put("Server recieved:".getBytes("UTF-8"));
-//			sendMsg.put(data);
-//			ctx.writeAndFlush(sendMsg);
+			// ByteBuffer sendMsg = ByteBuffer.allocate(8);
+			// sendMsg.putShort(sip);
+			// sendMsg.put("Server recieved:".getBytes("UTF-8"));
+			// sendMsg.put(data);
+			// ctx.writeAndFlush(sendMsg);
 		}
-		
+
 	}
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		if(cause instanceof java.io.IOException){
+		if (cause instanceof java.io.IOException) {
 			logger.error(cause.getMessage());
-		}else{
-			logger.error(cause.getMessage(),cause);
+		} else {
+			logger.error(cause.getMessage(), cause);
 		}
 	}
 }

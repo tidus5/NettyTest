@@ -1,4 +1,6 @@
 package com.tidus5.NettyTest.server;
+import java.util.concurrent.TimeUnit;
+
 import com.tidus5.NettyTest.net.Decoder;
 import com.tidus5.NettyTest.net.Encoder;
 import com.tidus5.NettyTest.net.ServerHandler;
@@ -6,9 +8,10 @@ import com.tidus5.NettyTest.net.ServerHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.timeout.IdleStateHandler;
 
 //继承Netty提供的初始化类，只要复写其中的方法就可以了
-public class HelloServerInitializer extends ChannelInitializer<SocketChannel> {
+public class ServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
@@ -26,10 +29,11 @@ public class HelloServerInitializer extends ChannelInitializer<SocketChannel> {
 //        pipeline.addLast("handler", new HelloServerHandler());
 //        //初始化类一般都是先加入编码解码器来解读传输来的消息，然后加入自定义类来处理业务逻辑
         
-        
+        pipeline.addLast(new IdleStateHandler(30, 0, 0, TimeUnit.SECONDS));
         pipeline.addLast(new Decoder());
         pipeline.addLast(new Encoder());
         pipeline.addLast(new ServerHandler());
+        
         
     }
 }

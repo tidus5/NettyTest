@@ -389,3 +389,170 @@ java.io.IOException: 远程主机强迫关闭了一个现有的连接。
 	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138) [netty-all-4.1.13.Final.jar:4.1.13.Final]
 	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_121]
 00:57:14.490 [nioEventLoopGroup-2-1] ERROR com.tidus5.NettyTest.net.ServerHandler - 远程主机强迫关闭了一个现有的连接。
+02:11:29.518 [main] INFO  com.tidus5.NettyTest.App - OK
+02:13:15.840 [main] INFO  com.tidus5.NettyTest.App - OK
+02:13:16.566 [nioEventLoopGroup-4-1] ERROR com.tidus5.NettyTest.net.ServerHandler - 您的主机中的软件中止了一个已建立的连接。
+01:02:25.591 [Thread-1] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xd75ac394]'
+01:02:25.605 [Thread-1] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0xd75ac394]'
+01:02:25.791 [main] INFO  com.tidus5.NettyTest.App - OK
+01:02:25.922 [nioEventLoopGroup-3-1] ERROR com.tidus5.NettyTest.net.ServerHandler - 您的主机中的软件中止了一个已建立的连接。
+01:04:48.812 [Thread-1] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xa2f77298]'
+01:04:48.815 [Thread-1] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0xa2f77298]'
+01:05:09.468 [main] INFO  com.tidus5.NettyTest.App - OK
+01:05:10.071 [nioEventLoopGroup-3-1] ERROR com.tidus5.NettyTest.net.ServerHandler - 您的主机中的软件中止了一个已建立的连接。
+01:06:16.010 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x3a230a1c]'
+01:06:16.012 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0x3a230a1c]'
+01:36:38.156 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xa8ee59e7]'
+01:36:38.158 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0xa8ee59e7]'
+23:57:12.847 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xe7a0064a]'
+23:57:12.867 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0xe7a0064a]'
+00:32:24.180 [nioEventLoopGroup-3-1] ERROR com.tidus5.NettyTest.net.ServerHandler - 您的主机中的软件中止了一个已建立的连接。
+00:45:10.671 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x42f33bbf]'
+00:45:10.674 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0x42f33bbf]'
+00:45:21.900 [nioEventLoopGroup-2-1] ERROR com.tidus5.NettyTest.net.ServerHandler - 远程主机强迫关闭了一个现有的连接。
+00:45:31.595 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xc1e76323]'
+00:45:31.597 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0xc1e76323]'
+01:03:50.880 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x17a3e4f7]'
+01:03:50.882 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0x17a3e4f7]'
+01:04:02.195 [nioEventLoopGroup-2-1] ERROR com.tidus5.NettyTest.net.ServerHandler - 远程主机强迫关闭了一个现有的连接。
+01:04:02.219 [nioEventLoopGroup-2-2] WARN  io.netty.channel.ChannelInitializer - Failed to initialize a channel. Closing: [id: 0x093585ad]
+io.netty.channel.ChannelPipelineException: com.tidus5.NettyTest.net.ClientHandler is not a @Sharable handler, so can't be added or removed multiple times.
+	at io.netty.channel.DefaultChannelPipeline.checkMultiplicity(DefaultChannelPipeline.java:588) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:199) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:392) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:379) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at com.tidus5.NettyTest.client.NettyClient$1.initChannel(NettyClient.java:44) ~[classes/:?]
+	at com.tidus5.NettyTest.client.NettyClient$1.initChannel(NettyClient.java:1) ~[classes/:?]
+	at io.netty.channel.ChannelInitializer.initChannel(ChannelInitializer.java:113) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.ChannelInitializer.handlerAdded(ChannelInitializer.java:105) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAdded0(DefaultChannelPipeline.java:597) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.access$000(DefaultChannelPipeline.java:44) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline$PendingHandlerAddedTask.execute(DefaultChannelPipeline.java:1387) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAddedForAllHandlers(DefaultChannelPipeline.java:1122) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.invokeHandlerAddedIfNeeded(DefaultChannelPipeline.java:647) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.register0(AbstractChannel.java:506) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.access$200(AbstractChannel.java:419) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe$1.run(AbstractChannel.java:478) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:403) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:462) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_121]
+01:04:16.270 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x1197f468]'
+01:04:16.273 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0x1197f468]'
+01:05:50.355 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xab6503e5]'
+01:05:50.358 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0xab6503e5]'
+01:06:05.480 [nioEventLoopGroup-2-1] ERROR com.tidus5.NettyTest.net.ServerHandler - 远程主机强迫关闭了一个现有的连接。
+01:06:05.511 [nioEventLoopGroup-2-2] WARN  io.netty.channel.ChannelInitializer - Failed to initialize a channel. Closing: [id: 0xff93ab43]
+io.netty.channel.ChannelPipelineException: com.tidus5.NettyTest.net.ClientHandler is not a @Sharable handler, so can't be added or removed multiple times.
+	at io.netty.channel.DefaultChannelPipeline.checkMultiplicity(DefaultChannelPipeline.java:588) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:199) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:392) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:379) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at com.tidus5.NettyTest.client.NettyClient$1.initChannel(NettyClient.java:44) ~[classes/:?]
+	at com.tidus5.NettyTest.client.NettyClient$1.initChannel(NettyClient.java:1) ~[classes/:?]
+	at io.netty.channel.ChannelInitializer.initChannel(ChannelInitializer.java:113) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.ChannelInitializer.handlerAdded(ChannelInitializer.java:105) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAdded0(DefaultChannelPipeline.java:597) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.access$000(DefaultChannelPipeline.java:44) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline$PendingHandlerAddedTask.execute(DefaultChannelPipeline.java:1387) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAddedForAllHandlers(DefaultChannelPipeline.java:1122) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.invokeHandlerAddedIfNeeded(DefaultChannelPipeline.java:647) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.register0(AbstractChannel.java:506) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.access$200(AbstractChannel.java:419) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe$1.run(AbstractChannel.java:478) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:403) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:462) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_121]
+01:10:47.554 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x9dfdb2ed]'
+01:10:47.557 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0x9dfdb2ed]'
+01:10:56.754 [nioEventLoopGroup-2-1] ERROR com.tidus5.NettyTest.net.ServerHandler - 远程主机强迫关闭了一个现有的连接。
+01:10:56.780 [nioEventLoopGroup-2-2] WARN  io.netty.channel.ChannelInitializer - Failed to initialize a channel. Closing: [id: 0xf93827ea]
+io.netty.channel.ChannelPipelineException: com.tidus5.NettyTest.net.ClientHandler is not a @Sharable handler, so can't be added or removed multiple times.
+	at io.netty.channel.DefaultChannelPipeline.checkMultiplicity(DefaultChannelPipeline.java:588) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:199) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:392) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:379) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at com.tidus5.NettyTest.client.NettyClient$1.initChannel(NettyClient.java:46) ~[classes/:?]
+	at com.tidus5.NettyTest.client.NettyClient$1.initChannel(NettyClient.java:1) ~[classes/:?]
+	at io.netty.channel.ChannelInitializer.initChannel(ChannelInitializer.java:113) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.ChannelInitializer.handlerAdded(ChannelInitializer.java:105) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAdded0(DefaultChannelPipeline.java:597) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.access$000(DefaultChannelPipeline.java:44) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline$PendingHandlerAddedTask.execute(DefaultChannelPipeline.java:1387) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAddedForAllHandlers(DefaultChannelPipeline.java:1122) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.invokeHandlerAddedIfNeeded(DefaultChannelPipeline.java:647) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.register0(AbstractChannel.java:506) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.access$200(AbstractChannel.java:419) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe$1.run(AbstractChannel.java:478) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:403) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:462) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_121]
+01:11:04.874 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xe6ffc0bb]'
+01:11:04.881 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0xe6ffc0bb]'
+01:11:49.936 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x61da5436]'
+01:11:49.938 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0x61da5436]'
+01:11:56.510 [nioEventLoopGroup-2-1] ERROR com.tidus5.NettyTest.net.ServerHandler - 远程主机强迫关闭了一个现有的连接。
+01:11:56.536 [nioEventLoopGroup-2-2] WARN  io.netty.channel.ChannelInitializer - Failed to initialize a channel. Closing: [id: 0x8e2e5cef]
+io.netty.channel.ChannelPipelineException: com.tidus5.NettyTest.net.ClientHandler is not a @Sharable handler, so can't be added or removed multiple times.
+	at io.netty.channel.DefaultChannelPipeline.checkMultiplicity(DefaultChannelPipeline.java:588) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:199) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:392) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:379) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at com.tidus5.NettyTest.client.NettyClient$1.initChannel(NettyClient.java:46) ~[classes/:?]
+	at com.tidus5.NettyTest.client.NettyClient$1.initChannel(NettyClient.java:1) ~[classes/:?]
+	at io.netty.channel.ChannelInitializer.initChannel(ChannelInitializer.java:113) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.ChannelInitializer.handlerAdded(ChannelInitializer.java:105) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAdded0(DefaultChannelPipeline.java:597) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.access$000(DefaultChannelPipeline.java:44) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline$PendingHandlerAddedTask.execute(DefaultChannelPipeline.java:1387) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAddedForAllHandlers(DefaultChannelPipeline.java:1122) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.invokeHandlerAddedIfNeeded(DefaultChannelPipeline.java:647) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.register0(AbstractChannel.java:506) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.access$200(AbstractChannel.java:419) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe$1.run(AbstractChannel.java:478) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:403) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:462) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_121]
+01:12:49.099 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x6288cb19]'
+01:12:49.102 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0x6288cb19]'
+01:13:05.917 [nioEventLoopGroup-2-1] ERROR com.tidus5.NettyTest.net.ServerHandler - 远程主机强迫关闭了一个现有的连接。
+01:13:20.571 [nioEventLoopGroup-2-2] WARN  io.netty.channel.ChannelInitializer - Failed to initialize a channel. Closing: [id: 0x7e36a75b]
+io.netty.channel.ChannelPipelineException: com.tidus5.NettyTest.net.ClientHandler is not a @Sharable handler, so can't be added or removed multiple times.
+	at io.netty.channel.DefaultChannelPipeline.checkMultiplicity(DefaultChannelPipeline.java:588) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:199) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:392) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.addLast(DefaultChannelPipeline.java:379) ~[netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at com.tidus5.NettyTest.client.NettyClient$1.initChannel(NettyClient.java:46) ~[classes/:?]
+	at com.tidus5.NettyTest.client.NettyClient$1.initChannel(NettyClient.java:1) ~[classes/:?]
+	at io.netty.channel.ChannelInitializer.initChannel(ChannelInitializer.java:113) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.ChannelInitializer.handlerAdded(ChannelInitializer.java:105) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAdded0(DefaultChannelPipeline.java:597) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.access$000(DefaultChannelPipeline.java:44) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline$PendingHandlerAddedTask.execute(DefaultChannelPipeline.java:1387) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAddedForAllHandlers(DefaultChannelPipeline.java:1122) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.invokeHandlerAddedIfNeeded(DefaultChannelPipeline.java:647) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.register0(AbstractChannel.java:506) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.access$200(AbstractChannel.java:419) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.AbstractChannel$AbstractUnsafe$1.run(AbstractChannel.java:478) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:403) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:462) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138) [netty-all-4.1.13.Final.jar:4.1.13.Final]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_121]
+01:19:16.827 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0xcdf94667]'
+01:19:16.829 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0xcdf94667]'
+01:19:26.737 [nioEventLoopGroup-2-1] ERROR com.tidus5.NettyTest.net.ServerHandler - 远程主机强迫关闭了一个现有的连接。
+01:19:41.132 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x1b71c4d5]'
+01:19:41.135 [main] WARN  io.netty.bootstrap.ServerBootstrap - Unknown channel option 'SO_SNDBUF' for channel '[id: 0x1b71c4d5]'
