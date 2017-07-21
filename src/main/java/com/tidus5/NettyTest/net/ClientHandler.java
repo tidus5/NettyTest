@@ -31,23 +31,8 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-		final EventLoop eventLoop = ctx.channel().eventLoop();
-		eventLoop.schedule(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					client.createBoostrap();
-					client.run();
-				} catch (InterruptedException | IOException e) {
-					e.printStackTrace();
-				}
-
-			}
-
-		}, 1L, TimeUnit.SECONDS);
-
-		super.channelInactive(ctx);
-
+		ctx.channel().eventLoop().schedule(() -> client.doConnect(), 1, TimeUnit.SECONDS);
+//		super.channelInactive(ctx);
 	}
 
 	@Override

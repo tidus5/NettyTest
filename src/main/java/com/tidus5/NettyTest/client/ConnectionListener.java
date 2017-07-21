@@ -26,7 +26,7 @@ public class ConnectionListener implements ChannelFutureListener {
 				@Override
 				public void run() {
 					try {
-						client.createBoostrap();
+						client.init();
 						client.run();
 					} catch (InterruptedException | IOException e) {
 						e.printStackTrace();

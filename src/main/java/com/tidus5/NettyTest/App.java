@@ -27,13 +27,13 @@ public class App {
 		
 		Thread.sleep(1000L);
 		
-		new Thread(() -> {
-			try {
-				new NettyClient().run();
-			} catch (InterruptedException | IOException e) {
-				e.printStackTrace();
-			}
-		}).start();
+//		new Thread(() -> {
+//			try {
+//				new NettyClient().run();
+//			} catch (InterruptedException | IOException e) {
+//				e.printStackTrace();
+//			}
+//		}).start();
 		System.out.println("Hello World!");
 		logger.info("OK");
 	}
