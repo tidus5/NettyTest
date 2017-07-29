@@ -44,7 +44,7 @@ public class NettyClient {
 		bootstrap.group(group);
 		bootstrap.channel(NioSocketChannel.class);
 		bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
-		bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 100);
+		bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 1000);
 		
 		bootstrap.handler(new ChannelInitializer<SocketChannel>() {
 			@Override

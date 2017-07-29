@@ -1,16 +1,19 @@
 package com.tidus5.NettyTest.net;
 
+
+import java.nio.ByteBuffer;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
-public class Encoder extends MessageToByteEncoder<java.nio.ByteBuffer> {
+public class Encoder extends MessageToByteEncoder<ByteBuffer> {
 
 	@Override
-	protected void encode(ChannelHandlerContext ctx, java.nio.ByteBuffer data, ByteBuf out) throws Exception {
+	protected void encode(ChannelHandlerContext ctx, ByteBuffer data, ByteBuf out) throws Exception {
 		
-		if(data instanceof java.nio.ByteBuffer){
-			java.nio.ByteBuffer buf = (java.nio.ByteBuffer) data;
+		if(data instanceof ByteBuffer){
+			ByteBuffer buf = (ByteBuffer) data;
 			
 			short sip = buf.getShort();
 			int len = buf.remaining();

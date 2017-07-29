@@ -2,10 +2,17 @@ package com.tidus5.NettyTest.server;
 
 import java.util.concurrent.TimeUnit;
 
+import com.tidus5.NettyTest.net.Decoder;
+import com.tidus5.NettyTest.net.Encoder;
+import com.tidus5.NettyTest.net.ServerHandler;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.ResourceLeakDetector;
@@ -33,30 +40,35 @@ public class NettyServer {
 		bootstrap.group(bossGroup, workerGroup);
 		// 开启socket
 		bootstrap.channel(NioServerSocketChannel.class);
-		
-		bootstrap.option(ChannelOption.SO_BACKLOG, 2500)
-		.option(ChannelOption.TCP_NODELAY, true)
-		.option(ChannelOption.SO_REUSEADDR, true)
-		.option(ChannelOption.SO_RCVBUF, 1024*256)
-        .option(ChannelOption.SO_SNDBUF, 1024*256)
-		.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000)
-		.childOption(ChannelOption.SO_KEEPALIVE, true);
-		
+
+		bootstrap.option(ChannelOption.SO_BACKLOG, 2500).option(ChannelOption.TCP_NODELAY, true)
+				.option(ChannelOption.SO_REUSEADDR, true).option(ChannelOption.SO_RCVBUF, 1024 * 256)
+				.option(ChannelOption.SO_SNDBUF, 1024 * 256).option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000)
+				.childOption(ChannelOption.SO_KEEPALIVE, true);
+
 		// 加入业务控制器，这里是加入一个初始化类，其中包含了很多业务控制器
-		bootstrap.childHandler(new ServerInitializer());
-		
+		bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
+			@Override
+			protected void initChannel(SocketChannel ch) throws Exception {
+				ChannelPipeline pipeline = ch.pipeline();
+				pipeline.addLast(new IdleStateHandler(30, 0, 0, TimeUnit.SECONDS));
+				pipeline.addLast(new Decoder());
+				pipeline.addLast(new Encoder());
+				pipeline.addLast(new ServerHandler());
+			}
+		});
 
 	}
-	
+
 	public void startServer() throws InterruptedException {
 		startServer(portNumber);
 	}
 
 	public void startServer(int port) throws InterruptedException {
 		try {
-			
+
 			initBootstrap();
-			
+
 			// 服务器绑定端口监听
 			ChannelFuture f = bootstrap.bind(port).sync();
 			System.out.println(" server started.");
@@ -70,8 +82,8 @@ public class NettyServer {
 			workerGroup.shutdownGracefully();
 		}
 	}
-	
-	public static void main(String args[]) throws InterruptedException{
+
+	public static void main(String args[]) throws InterruptedException {
 		new NettyServer().startServer();
 	}
 }

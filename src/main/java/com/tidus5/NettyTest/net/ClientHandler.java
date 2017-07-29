@@ -1,6 +1,5 @@
 package com.tidus5.NettyTest.net;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +11,6 @@ import com.tidus5.NettyTest.client.NettyClient;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.EventLoop;
 
 public class ClientHandler extends ChannelInboundHandlerAdapter {
 
@@ -26,7 +24,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
-		System.out.println("connected to server.");
+//		System.out.println("connected to server.");
 	}
 
 	@Override
