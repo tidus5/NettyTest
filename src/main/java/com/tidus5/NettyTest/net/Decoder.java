@@ -11,7 +11,7 @@ public class Decoder extends ByteToMessageDecoder {
 
 	@Override
 	protected void decode(ChannelHandlerContext ctx, ByteBuf data, List<Object> in) throws Exception {
-		while(data.readableBytes() > 4){
+		while(data.readableBytes() >= 4){
 			data.markReaderIndex();	
 			short sip = data.readShort();
 			short len = data.readShort();

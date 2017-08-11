@@ -2,6 +2,8 @@ package com.tidus5.NettyTest.net;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,16 +17,10 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
 	private Logger logger = LoggerFactory.getLogger(ServerHandler.class);
 
+	private ExecutorService threadPool = Executors.newCachedThreadPool();
+
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
-//		System.out.println("connedtion active");
-//
-//		String str = "Server welcomes.";
-//		byte[] array = str.getBytes(Charset.forName("UTF-8"));
-//		ByteBuffer sendMsg = ByteBuffer.allocate(array.length + 2);
-//		sendMsg.putShort((short) 0);
-//		sendMsg.put(array);
-//		ctx.writeAndFlush(sendMsg.flip());
 	}
 
 	@Override
@@ -33,24 +29,24 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+		threadPool.execute(() -> {
+			try {
+				if (msg instanceof ByteBuffer) {
+					ByteBuffer buf = (ByteBuffer) msg;
+					short sip = buf.getShort();
 
-		if (msg instanceof ByteBuffer) {
-			ByteBuffer buf = (ByteBuffer) msg;
-			short sip = buf.getShort();
+					byte[] data = new byte[buf.remaining()];
+					buf.get(data);
 
-			byte[] data = new byte[buf.remaining()];
-			buf.get(data);
-
-			System.out.println("client says:" + new String(data, Charset.forName("UTF-8")));
-
-			byte[] array = "Server recieved-".getBytes("UTF-8");
-			ByteBuffer sendMsg = ByteBuffer.allocate(array.length + data.length + 2);
-			sendMsg.putShort(sip);
-			sendMsg.put(array);
-			sendMsg.put(data);
-			ctx.writeAndFlush(sendMsg.flip());
-		}
-
+					ByteBuffer sendMsg = ByteBuffer.allocate(2 + data.length);
+					sendMsg.putShort((short) (sip + 1));
+					sendMsg.put(data);
+					ctx.writeAndFlush(sendMsg.flip());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
 	@Override

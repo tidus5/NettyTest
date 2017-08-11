@@ -23,6 +23,8 @@ public class NettyServer {
 	private ServerBootstrap bootstrap;
 	private NioEventLoopGroup bossGroup;
 	private NioEventLoopGroup workerGroup;
+	private ChannelFuture serverChannelFuture;
+	
 	/**
 	 * 服务端监听的端口地址
 	 */
@@ -41,9 +43,18 @@ public class NettyServer {
 		// 开启socket
 		bootstrap.channel(NioServerSocketChannel.class);
 
-		bootstrap.option(ChannelOption.SO_BACKLOG, 2500).option(ChannelOption.TCP_NODELAY, true)
-				.option(ChannelOption.SO_REUSEADDR, true).option(ChannelOption.SO_RCVBUF, 1024 * 256)
-				.option(ChannelOption.SO_SNDBUF, 1024 * 256).option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000)
+		
+		// option  		These options will be set on the Server Channel when bind() or connect() method is called. This channel is one per server.
+		//			 	parameters apply to the server socket (Server channel) that is listening for connections 
+		//childOption  	which gets created once the serverChannel accepts a client connection. This channel is per client (or per client socket).
+		//				apply to the socket that gets created once the connection is accepted by the server socket.
+		
+		bootstrap.option(ChannelOption.SO_BACKLOG, 2500)			
+				.option(ChannelOption.SO_REUSEADDR, true)
+				.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 1000)
+				.childOption(ChannelOption.SO_RCVBUF, 1024 * 32)
+				.childOption(ChannelOption.SO_SNDBUF, 1024 * 32)
+				.childOption(ChannelOption.TCP_NODELAY, true)
 				.childOption(ChannelOption.SO_KEEPALIVE, true);
 
 		// 加入业务控制器，这里是加入一个初始化类，其中包含了很多业务控制器
@@ -73,6 +84,7 @@ public class NettyServer {
 			ChannelFuture f = bootstrap.bind(port).sync();
 			System.out.println(" server started.");
 			// 监听服务器关闭监听
+			serverChannelFuture = f;
 			f.channel().closeFuture().sync();
 			// 可以简写为
 			/* b.bind(portNumber).sync().channel().closeFuture().sync(); */

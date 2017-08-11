@@ -24,7 +24,7 @@ public class Encoder extends MessageToByteEncoder<ByteBuffer> {
 			byte[] array = new byte[buf.remaining()];
 			buf.get(array);
 			out.writeBytes(array);
-			
+			ctx.flush();
 		}
 	}
 

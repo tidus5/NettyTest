@@ -71,22 +71,17 @@ public class NettyClient {
 	public void doConnect() {
 		if (!started)
 			return;
-		
-		
 		ChannelFuture future = bootstrap.connect(host, port);
-		
 		future.addListener(new ChannelFutureListener() {
 			public void operationComplete(ChannelFuture f) throws Exception {
 				if (f.isSuccess()) {
-					System.out.println("connect success" + host + ":" + port);
-//					new Thread(() -> close());
+					System.out.println("connect success!" + host + ":" + port);
 				} else {
-					System.out.println("connect failed " + host + ":" + port);
+					System.out.println("connecting..." + host + ":" + port);
 					f.channel().eventLoop().schedule(() -> doConnect(), 1, TimeUnit.SECONDS);
 				}
 			}
 		});
-
 	}
 
 	public void addConsoleSendThread() {
