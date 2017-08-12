@@ -1,12 +1,11 @@
 package com.tidus5.NettyTest.net;
 
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.tidus5.NettyTest.server.NettyServer;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -16,8 +15,6 @@ import io.netty.handler.timeout.IdleStateEvent;
 public class ServerHandler extends ChannelInboundHandlerAdapter {
 
 	private Logger logger = LoggerFactory.getLogger(ServerHandler.class);
-
-	private ExecutorService threadPool = Executors.newCachedThreadPool();
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -29,7 +26,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		threadPool.execute(() -> {
+		NettyServer.threadPool.execute(() -> {
 			try {
 				if (msg instanceof ByteBuffer) {
 					ByteBuffer buf = (ByteBuffer) msg;
@@ -69,23 +66,6 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 			} else if (event.state() == IdleState.ALL_IDLE) {
 				System.out.println("all idle");
 			}
-
-			// //0x7002,
-			// NetBuffer data =
-			// NetBuffer.createNetBuff(SystemControl.instance.RESPONSE_KEEPALIVE,
-			// MsgType.KEEP_ALIVE);
-			// String account = (String)
-			// ctx.channel().attr(AttributeKey.valueOf(Constants.ACCOUNT_KEY)).get();
-			// if(account != null){
-			//// LogUtil.info(" send hearbeat account :"+account);
-			// Context.instance.dealIndexWithSendingMsg(data,
-			// Context.instance.getSessionTextId(ctx.channel()));
-			// ctx.channel().writeAndFlush(data).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
-			// }else{
-			// //TODO 怎么检测空socket
-			// LogUtil.info("heartbeat send failed . no account");
-			//// ctx.channel().writeAndFlush(data).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
-			// }
 		}
 	}
 }

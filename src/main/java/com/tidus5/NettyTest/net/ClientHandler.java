@@ -1,9 +1,6 @@
 package com.tidus5.NettyTest.net;
 
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -17,8 +14,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class ClientHandler extends ChannelInboundHandlerAdapter {
 
 	private Logger logger = LoggerFactory.getLogger(ServerHandler.class);
-
-	private ExecutorService threadPool = Executors.newCachedThreadPool();
 
 	private NettyClient client;
 
@@ -42,8 +37,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-
-		threadPool.execute(() -> {
+		NettyClient.threadPool.execute(() -> {
 			try {
 				if (msg instanceof ByteBuffer) {
 					ByteBuffer buf = (ByteBuffer) msg;
@@ -54,7 +48,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
 					System.out.println(" rec:" + sip);
 					
-					Thread.sleep(1000L);
+//					Thread.sleep(10L);
 
 					sip++;
 					ByteBuffer sendMsg = ByteBuffer.allocate(2 + data.length);

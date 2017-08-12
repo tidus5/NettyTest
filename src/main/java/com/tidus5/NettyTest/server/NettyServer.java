@@ -1,5 +1,10 @@
 package com.tidus5.NettyTest.server;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.tidus5.NettyTest.net.Decoder;
@@ -25,6 +30,8 @@ public class NettyServer {
 	private NioEventLoopGroup workerGroup;
 	private ChannelFuture serverChannelFuture;
 	
+	public static ExecutorService threadPool = Executors.newCachedThreadPool();
+
 	/**
 	 * 服务端监听的端口地址
 	 */
@@ -43,18 +50,18 @@ public class NettyServer {
 		// 开启socket
 		bootstrap.channel(NioServerSocketChannel.class);
 
-		
-		// option  		These options will be set on the Server Channel when bind() or connect() method is called. This channel is one per server.
-		//			 	parameters apply to the server socket (Server channel) that is listening for connections 
-		//childOption  	which gets created once the serverChannel accepts a client connection. This channel is per client (or per client socket).
-		//				apply to the socket that gets created once the connection is accepted by the server socket.
-		
-		bootstrap.option(ChannelOption.SO_BACKLOG, 2500)			
-				.option(ChannelOption.SO_REUSEADDR, true)
-				.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 1000)
-				.childOption(ChannelOption.SO_RCVBUF, 1024 * 32)
-				.childOption(ChannelOption.SO_SNDBUF, 1024 * 32)
-				.childOption(ChannelOption.TCP_NODELAY, true)
+		// option These options will be set on the Server Channel when bind() or
+		// connect() method is called. This channel is one per server.
+		// parameters apply to the server socket (Server channel) that is
+		// listening for connections
+		// childOption which gets created once the serverChannel accepts a
+		// client connection. This channel is per client (or per client socket).
+		// apply to the socket that gets created once the connection is accepted
+		// by the server socket.
+
+		bootstrap.option(ChannelOption.SO_BACKLOG, 2500).option(ChannelOption.SO_REUSEADDR, true)
+				.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 1000).childOption(ChannelOption.SO_RCVBUF, 1024 * 32)
+				.childOption(ChannelOption.SO_SNDBUF, 1024 * 32).childOption(ChannelOption.TCP_NODELAY, true)
 				.childOption(ChannelOption.SO_KEEPALIVE, true);
 
 		// 加入业务控制器，这里是加入一个初始化类，其中包含了很多业务控制器
@@ -76,26 +83,68 @@ public class NettyServer {
 	}
 
 	public void startServer(int port) throws InterruptedException {
-		try {
 
-			initBootstrap();
+		initBootstrap();
 
-			// 服务器绑定端口监听
-			ChannelFuture f = bootstrap.bind(port).sync();
-			System.out.println(" server started.");
-			// 监听服务器关闭监听
-			serverChannelFuture = f;
-			f.channel().closeFuture().sync();
-			// 可以简写为
-			/* b.bind(portNumber).sync().channel().closeFuture().sync(); */
-		} finally {
-			// Netty优雅退出
-			bossGroup.shutdownGracefully();
-			workerGroup.shutdownGracefully();
-		}
+		// 服务器绑定端口监听
+		ChannelFuture f = bootstrap.bind(port).sync();
+		System.out.println(" server started.");
+		// 监听服务器关闭监听
+		serverChannelFuture = f;
+
+	}
+
+	public void addConsoleSendThread() {
+		Thread thread = new Thread() { // 读取控制台输入
+			@Override
+			public void run() {
+				try {
+					BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+					String line = null;
+					while ((line = br.readLine()) != null) {
+						if (line.equals("close")) {
+							System.out.println("close .. will exit ....");
+							System.exit(0);
+						}
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		thread.start();
+
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			@Override
+			public void run() {
+				System.out.println("application will exit ....");
+				try {
+					serverChannelFuture.channel().close().sync();
+					
+					int cd = 5;
+					while (cd-- > 0) {
+						try {
+							Thread.sleep(1000L);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						System.out.println(" waiting to shutdown " + cd);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					// Netty优雅退出
+					bossGroup.shutdownGracefully();
+					workerGroup.shutdownGracefully();
+					threadPool.shutdown();
+				}
+			}
+		});
 	}
 
 	public static void main(String args[]) throws InterruptedException {
-		new NettyServer().startServer();
+		NettyServer server = new NettyServer();
+		server.startServer();
+		server.addConsoleSendThread();
 	}
 }

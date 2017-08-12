@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.tidus5.NettyTest.net.ClientHandler;
@@ -31,6 +33,7 @@ public class NettyClient {
 	private Bootstrap bootstrap;
 	private Channel ch;
 	private boolean started;
+	public static ExecutorService threadPool = Executors.newCachedThreadPool();
 
 	public NettyClient(String host, int port) {
 		this.host = host;
