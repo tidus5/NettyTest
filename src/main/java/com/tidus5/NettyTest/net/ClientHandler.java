@@ -10,12 +10,15 @@ import com.tidus5.NettyTest.client.NettyClient;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.AttributeKey;
 
 public class ClientHandler extends ChannelInboundHandlerAdapter {
 
-	private Logger logger = LoggerFactory.getLogger(ServerHandler.class);
+	private Logger logger = LoggerFactory.getLogger(ClientHandler.class);
 
 	private NettyClient client;
+	
+	public static AttributeKey<Long> LAST_SEND_TIME = AttributeKey.valueOf("LAST_SEND_TIME");
 
 	public ClientHandler(NettyClient client) {
 		this.client = client;
@@ -27,7 +30,8 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 		sendMsg.putShort((short) (1));
 		sendMsg.put(new byte[0]);
 		ctx.writeAndFlush(sendMsg.flip());
-		System.out.println("send:" + 1);
+		ctx.channel().attr(LAST_SEND_TIME).set(System.currentTimeMillis());
+//		System.out.println("send:" + 1);
 	}
 
 	@Override
@@ -45,17 +49,22 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
 					byte[] data = new byte[buf.remaining()];
 					buf.get(data);
-
-					System.out.println(" rec:" + sip);
+//					System.out.println(" rec:" + sip);
+					Long lastSendTime = ctx.channel().attr(LAST_SEND_TIME).get();
+					long now = System.currentTimeMillis();
+					if(lastSendTime != null && now - lastSendTime > 1000L){
+						logger.info(" time spend:"+ (now - lastSendTime));
+					}
 					
-//					Thread.sleep(10L);
-
-					sip++;
-					ByteBuffer sendMsg = ByteBuffer.allocate(2 + data.length);
-					sendMsg.putShort(sip);
-					sendMsg.put(data);
-					ctx.writeAndFlush(sendMsg.flip());
-					System.out.println("send:" + sip);
+//					Thread.sleep(3000L);
+//
+//					sip++;
+//					ByteBuffer sendMsg = ByteBuffer.allocate(2 + data.length);
+//					sendMsg.putShort(sip);
+//					sendMsg.put(data);
+//					ctx.writeAndFlush(sendMsg.flip());
+////					System.out.println("send:" + sip);
+//					ctx.channel().attr(LAST_SEND_TIME).set(System.currentTimeMillis());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

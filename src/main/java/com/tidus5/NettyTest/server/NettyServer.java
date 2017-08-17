@@ -120,9 +120,7 @@ public class NettyServer {
 				System.out.println("application will exit ....");
 				try {
 					serverChannelFuture.channel().close().sync();
-					
-					int cd = 5;
-					while (cd-- > 0) {
+					for(int cd = 5; cd > 0; cd --){
 						try {
 							Thread.sleep(1000L);
 						} catch (InterruptedException e) {
@@ -134,9 +132,10 @@ public class NettyServer {
 					e.printStackTrace();
 				} finally {
 					// Netty优雅退出
+					threadPool.shutdown();
 					bossGroup.shutdownGracefully();
 					workerGroup.shutdownGracefully();
-					threadPool.shutdown();
+					
 				}
 			}
 		});
