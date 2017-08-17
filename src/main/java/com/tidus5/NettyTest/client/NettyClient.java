@@ -7,6 +7,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -41,7 +42,7 @@ public class NettyClient {
 	private Bootstrap bootstrap;
 	private Channel ch;
 	private boolean started;
-	private Map<String, Channel> channelsMap = new HashMap<>();
+	private Map<String, Channel> channelsMap = new ConcurrentHashMap<>();
 	public static ExecutorService threadPool = Executors.newCachedThreadPool();
 	public static ScheduledExecutorService scheduleThreadPool = Executors.newScheduledThreadPool(20);
 
@@ -130,9 +131,12 @@ public class NettyClient {
 	}
 
 	public static void main(String args[]) throws InterruptedException, IOException {
+//		ConfigurationSource source = new ConfigurationSource(new FileInputStream(config + File.separator + "conf" + File.separator + "log4j2.xml"));
+//		Configurator.initialize(null, source);
+		
 		NettyClient client = new NettyClient("127.0.0.1", 7878);
 		client.init();
-		for (int i = 0; i < 3000; i++)
+		for (int i = 0; i < 1000; i++)
 			client.doConnect();
 		scheduleThreadPool.scheduleAtFixedRate(() -> logger.info("channel size:" + client.getChannelsMap().size()), 1,
 				5, TimeUnit.SECONDS);
